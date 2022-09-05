@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=0">
+    <title>The Artist Overseas</title>
+    <link rel="manifest" href="manifest.json">
+
+
+    <!-- Favicons -->
+    <link href="assets/img/amit-icon.jpg" rel="icon">
+    <link href="assets/img/amit-icon.jpg" rel="apple-touch-icon">
+    <link rel="stylesheet" href="assets/css/main.css">
+
+    <!-- BOOTSTRAP + ICONS  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <!-- SWIPER CSS  -->
+    <link rel="stylesheet" href="assets/swiper/swiper-bundle.min.css">
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+
+    <!-- VUE JS -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script>
+        window.addEventListener('offline', () => alert('You are offline ! Please Refresh'));
+    </script>
+
+
+
+
+</head>
+
+<body id="app" class="overflow-x-hidden">
+
+    <!-- spinner -->
+    <div v-if="spinner" class="d-flex flex-column justify-content-center align-items-center spinner w-100 h-100">
+        <img src="assets/img/artist logo transparent.png" alt="logo" class="img-fluid " style="width: 100px;">
+        <!-- <h6 class="text-secondary mt-3">{{company}}</h6> -->
+        <!-- <h4 class="text-primary mt-3">This site is under development !</h4>
+        <h6 class="text-secondary com fs-small point" @click="this.development = ! this.development">Amazing results are
+            on the way ...</h6> -->
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <header class="d-flex justify-content-between align-items-center shadow com">
+        <!-- BRAND SECTION -->
+        <section class="d-flex p-2 align-items-center">
+            <a href="#"><img class="rounded m-2" src="assets/img/artis7 icon.jpeg" :alt="profile.companyName"
+                    style="width: 50px;"></a>
+            <a href="#">
+                <h1 class="fs-5 m-2 cin">{{company}}</h1>
+            </a>
+        </section>
+        <!-- NAVBAR SECTION -->
+        <!-- {{tarjem(` ;; ;; ;;`)}} -->
+        <nav class="navbox arb gap-3">
+            <a class="mx-3" href="#home">{{tarjem(`Home;;الصفحة الرئيسية;;дом;;`)}}</a>
+            <a class="mx-3" href="#about">{{tarjem(`About;;نبذة عنا;;о нас;;`)}}</a>
+            <a class="mx-3" href="#programs">{{tarjem(`Our Programs;;برامجنا;;Сервисы;;`)}}</a>
+            <a class="mx-3" href="#blogs">{{tarjem(`Blogs;;اخر الاخبار`)}}</a>
+            <a class="mx-3" href="#faq">{{tarjem(`FAQ ;;الاسئلة المتكررة ;;Часто задаваемые
+                вопросы;;`)}}</a>
+
+            <a class="mx-3 btn btn-primary" href="#contact">{{tarjem(`Contact ;;تواصل معنا ;;связаться с
+                нами ;;`)}}</a>
+        </nav>
+        <!-- <i class="bi bi-translate m-3 fs-1 menu point text-secondary"></i> -->
+        <i class="bi bi-grid-fill m-3 fs-1 menu point text-secondary " data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasWithBothOptions"></i>
+        <!-- <i class="bi bi-three-dots-vertical m-3 fs-1 menu point text-secondary" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasWithBothOptions"></i> -->
+
+        <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+            aria-labelledby="offcanvasWithBothOptionsLabel" style="width: 85% !important;">
+
+            <div class="offcanvas-body">
+
+                <center>
+                    <a href="#"><img class=" m-2 " src="assets/img/artis7 icon.jpeg" alt="BRAND NAME" width="80"></a>
+                    <h6 class="text-primary my-3">{{company}}</h6>
+
+                    <!-- <h6 class="my-1">{{profile.bio}}</h6> -->
+
+                    <div class="d-flex justify-content-evenly mt-4 fs-4">
+                        <a :href="profile.whatsapp1" class="twitter"><i class="bi bi-whatsapp text-secondary"></i></a>
+                        <a :href="profile.facebook1" class="facebook"><i class="bi bi-facebook text-secondary"></i></a>
+                        <a :href="profile.instagram" class="instagram"><i
+                                class="bi bi-instagram text-secondary"></i></a>
+                        <!-- <a href="#" class="google-plus"><i class="bi bi-skype text-secondary"></i></a> -->
+                        <a :href="profile.linkedIn" class="linkedin"><i class="bi bi-linkedin text-secondary"></i></a>
+                    </div>
+                    <hr class="w-75">
+
+                    <!-- TAGS -->
+                    <div class="d-flex justify-content-evenly align-items-center flex-column mb-3 arb">
+
+                        <div class="mb-1 p-2 mx-auto  rounded-pill" data-bs-dismiss="offcanvas"><a
+                                href="#home">{{tarjem(`Home;;الصفحة الرئيسية;;дом;;`)}}</a>
+                        </div>
+                        <div class="my-1 p-2 mx-auto  rounded-pill" data-bs-dismiss="offcanvas"><a
+                                href="#about">{{tarjem(`About;;نبذة عنا;;о нас;;`)}}</a></div>
+                        <div class="my-1 p-2 mx-auto  rounded-pill" data-bs-dismiss="offcanvas"><a
+                                href="#programs">{{tarjem(`Our Programs;;برامجنا;;Сервисы;;`)}}</a></div>
+                        <!-- <div class="my-1 p-2  mx-auto  rounded-pill" data-bs-dismiss="offcanvas"><a
+                                href="#media">{{tarjem(`Media ;;الصور ;;СМИ;;`)}}</a></div>
+                        <div class="my-1 p-2 mx-auto rounded-pill" data-bs-dismiss="offcanvas"><a
+                                href="#team">{{tarjem(`Team ;;فريقنا ;;команда;;`)}}</a>
+                        </div> -->
+                        <div class="my-1 p-2 mx-auto  rounded-pill" data-bs-dismiss="offcanvas"><a
+                                href="#faq">{{tarjem(`FAQ ;;الاسئلة المتكررة ;;Часто задаваемые
+                                вопросы;;`)}}</a>
+                        </div>
+                        <div class="my-1 p-2 mx-auto  rounded-pill" data-bs-dismiss="offcanvas"><a
+                                href="#blogs">{{tarjem(`Blogs;;آخر الاخبار`)}}</a>
+                        </div>
+                        <div class="p-2 w-75 btn btn-outline-primary mx-auto" data-bs-dismiss="offcanvas"><a
+                                href="#contact">{{tarjem(`Contact ;;تواصل معنا ;;связаться с нами
+                                ;;`)}}</a></div>
+
+                    </div>
+
+                    <i class="bi bi-arrow-return-right fs-2 text-secondary" data-bs-dismiss="offcanvas"></i>
+
+
+                </center>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="position-relative" id="home" style="top:40px;">
+        <picture class="">
+            <source media="(max-width:600px)" srcset="assets/img/mobile.jpg" class="img-fluid">
+            <source media="(max-width:1000px)" srcset="assets/img/tablets.jpg" class="img-fluid">
+            <img src="assets/img/artist team.png" class="img-fluid w-100" style="filter: brightness(60%);">
+        </picture>
+        <div
+            class="hero-box position-absolute container start-50 translate-middle arb d-flex justify-content-evenly align-items-center flex-column">
+            <h1 class="text-light spot-b fs-1 text-center">{{profile.heading}}</h1>
+            <h1 class="text-center text-light mt-4 lh-base spot-b fs-6"> {{profile.bio}} </h1>
+            <a :href="profile.getStarted" class="btn btn-outline-light mt-2 px-5 fs-5 py-2 rounded arb">{{tarjem(`Apply
+                Now;;قدم طلبك الان`)}} </a>
+            
+        </div>
+
+    </section>
+
+
+    <main class="arb">
+
+        <!-- ======= ABOUT Section ======= -->
+        <section id="about" class="about">
+            <div class="container" data-aos="fade-up" data-aos-duration="1000">
+
+                <div class="section-title container ">
+                    <h2 class="mb-5 arb">{{tarjem(`About us;;نبذة عنا;;о нас;;`)}}</h2>
+                    <p class="text-center fs-3 arb">{{tarjem(`نقوم بتقديم طلبات سفر الى جميع الدول;;we only fill up
+                        applications`)}}</p>
+                </div>
+
+                <div class="row content" :dir="dir">
+                    <div class="col-lg-6">
+                        <p class="arb fs-5" data-aos="fade-left" data-aos-duration="2000"> {{profile.about1}} </p>
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0">
+                        <!-- <p></p> -->
+                        <ul class="arb" data-aos="fade-right" data-aos-duration="2000">
+                            <li> <strong>{{tarjem(`Services;;خدماتنا;;Сервисы;;`)}} : </strong>
+                                {{profile.about2}}
+                            </li>
+                            <li> <strong>{{tarjem(`Mission;;مهمتنا;;Наша миссия;;`)}} : </strong>
+                                {{profile.mission}}
+                            </li>
+                            <li> <strong>{{tarjem(`Vision;;رؤيتنا;;наш взгляд;;`)}} : </strong>
+                                {{profile.vision}}
+                            </li>
+                        </ul>
+                        <div class="d-flex justify-content-between align-items-center">
+
+                            <a :href="profile.learnMore" class="btn btn-outline-primary px-3 w-100 m-1"> {{tarjem(`Learn
+                                more;;اعرف اكثر`)}} </a>
+                            <a :href="profile.video" class="btn btn-outline-secondary px-3 w-100 m-1"><i
+                                    class="bi bi-play-circle mx-1"></i> {{tarjem(`video;;شاهد فيديو`)}} </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- ======= Counts Section ======= -->
+            <!-- <section id="counts" class="counts section-bg">
+                <div class="container">
+
+                    <div class="row d-flex justify-content-around">
+
+                        <div class="col-lg-3 col-md-6 mt-5 mt-md-0" data-aos="fade-up" data-aos-duration="1000"
+                            data-aos-delay="50">
+                            <div class="count-box shadow-sm">
+                                <i class="bi bi-hourglass"></i>
+                                <div class="purecounter-pot">
+                                    <span data-purecounter-start="0" :data-purecounter-end="profile.counter1"
+                                        data-purecounter-duration="4" class="purecounter"></span>
+                                    
+                                </div>
+                                <p class="arb">{{tarjem(`Operating since;;نعمل منذ;;Работает с;;`)}}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mt-5 mt-md-0" data-aos="fade-up" data-aos-duration="1000"
+                            data-aos-delay="500">
+                            <div class="count-box shadow-sm">
+                                <i class="bi bi-globe2"></i>
+                                <div class="purecounter-pot">
+                                    <span data-purecounter-start="0" :data-purecounter-end="profile.counter2"
+                                        data-purecounter-duration="4" class="purecounter"></span>
+                                    <span>+</span>
+                                </div>
+                                <p class="arb">{{tarjem(`Countries;;بلد;;страны;;`)}}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mt-5 mt-md-0" data-aos="fade-up" data-aos-duration="1000"
+                            data-aos-delay="800">
+                            <div class="count-box shadow-sm">
+                                <i class="bi bi-boxes"></i>
+                                <div class="purecounter-pot">
+                                    <span data-purecounter-start="0" :data-purecounter-end="profile.counter3"
+                                        data-purecounter-duration="4" class="purecounter"></span>
+                                    <span> K +</span>
+                                </div>
+                                <p class="arb">{{tarjem(`Help per year;;مساعدة في السنة;;помощь в год;;`)}}</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </section> -->
+
+            <!-- ======= Counts Section ======= -->
+            <section id="counts" class="counts section-bg">
+                <div class="container">
+
+                    <div class="row d-flex justify-content-around">
+
+                        <div class="col-lg-3 col-md-6 mt-5 mt-md-0" data-aos="fade-up" data-aos-duration="1000"
+                            data-aos-delay="50">
+                            <div class="count-box shadow-sm">
+                                <i class="bi bi-hourglass"></i>
+                                <div class="purecounter-pot">
+                                    <span data-purecounter-start="0" :data-purecounter-end="profile.counter1"
+                                        data-purecounter-duration="2" class="purecounter"></span>
+                                    <!-- <span> K +</span> -->
+                                </div>
+                                <p class="text-secondary com">Operating since</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mt-5 mt-md-0" data-aos="fade-up" data-aos-duration="1000"
+                            data-aos-delay="500">
+                            <div class="count-box shadow-sm">
+                                <i class="bi bi-globe2"></i>
+                                <div class="purecounter-pot">
+                                    <span data-purecounter-start="0" :data-purecounter-end="profile.counter2"
+                                        data-purecounter-duration="2" class="purecounter"></span>
+                                    <span>+</span>
+                                </div>
+                                <p class="text-secondary com">Countries</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mt-5 mt-md-0" data-aos="fade-up" data-aos-duration="1000"
+                            data-aos-delay="800">
+                            <div class="count-box shadow-sm">
+                                <i class="bi bi-boxes"></i>
+                                <div class="purecounter-pot">
+                                    <span data-purecounter-start="0" :data-purecounter-end="profile.counter3"
+                                        data-purecounter-duration="2" class="purecounter"></span>
+                                    <span> K +</span>
+                                </div>
+                                <p class="text-secondary com">Application per year</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </section>
+        </section>
+
+        <!-- ======= Programs Section ======= -->
+        <section id="programs">
+            <div class="section-title container">
+                <!-- <h2 class="mb-5"></h2>
+                <p class="text-center fs-3">Printing Magic</p>
+            </div> -->
+
+                <div class="section-title container">
+                    <!-- <h2 class="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit</h2> -->
+                    <p class="text-center fs-3 arb" data-aos="fade-up" data-aos-duration="2000">{{tarjem(`Our
+                        Programs;;برامجنا;;Сервисы;;`)}}</p>
+                    <h6 class="arb mt-5 text-secondary text-center lh-base" data-aos="fade-left"
+                        data-aos-duration="2000">
+                        {{tarjem(`Our biggest edge over the competition is top-quality packaging which we deliver
+                        through different high end printing techniques found below. ;;أكبر ميزة لدينا على المنافسة
+                        هي التغليف عالي الجودة الذي نقدمه من خلال تقنيات الطباعة المتطورة المختلفة الموجودة أدناه.
+                        ;;Наше самое большое преимущество перед конкурентами — это высококачественная упаковка,
+                        которую мы поставляем с помощью различных высокотехнологичных технологий печати, описанных ниже.
+                        ;;`)}}
+                    </h6>
+                </div>
+                <div class="services-box container d-flex justify-content-around align-items-center flex-wrap">
+                    <card v-for="s in profile.services" width="300" :url="s.url" :imgAlt="s.title" :title="s.title"
+                        :info="s.description" :id="s.id">
+                    </card>
+
+                </div>
+
+        </section>
+
+
+
+        <section id="blogs">
+
+            <div class="section-title container">
+                <h2 class="lh-lg mb-5 arb" data-aos="fade-right" data-aos-duration="2000"> {{tarjem(`Our latest
+                    blogs;;أخبارنا الأخيرة ومدوناتنا`)}}
+                </h2>
+                <p class="text-center fs-3 arb" data-aos="fade-up" data-aos-duration="2000"> {{tarjem(`Our latest
+                    blogs;;آخر الاخبار`)}}</p>
+            </div>
+            <!-- blogs cards -->
+            <div class="d-flex justify-content-evenly align-items-center flex-wrap container">
+
+                <blog v-for="b in profile.blogs" :title="b.blogTitle" :author="b.author" :date="b.date"
+                    :counter="b.index" :tags="b.tags" :index="b.id" :images="b.images" :content="b.blogContent"
+                    :img="b.images[0].url" :lang="lang"></blog>
+
+
+            </div>
+        </section>
+
+
+
+
+        <!-- ======= FAQ Section ======= -->
+        <section id="faq">
+
+            <div class="section-title container">
+                <h2 class="lh-lg mb-5 arb"> {{tarjem(`
+                    We’re here to answer any question you might have. If the questions below are not what you’re
+                    looking for, scroll down and send us an email.;;
+                    نحن هنا للإجابة على أي سؤال قد يكون لديك. إذا لم تكن الأسئلة أدناه هي ما تبحث عنه ، فمرر لأسفل
+                    وأرسل إلينا بريدًا إلكترونيًا.
+                    ;;
+                    Мы здесь, чтобы ответить на любой ваш вопрос. Если вопросы ниже не то, что вы ищете, прокрутите
+                    вниз и отправьте нам электронное письмо.
+                    ;;
+                    `)}} </h2>
+                <p class="text-center fs-3 arb">{{tarjem(`F A Q ;;الاسئلة المتكررة ;;Часто задаваемые
+                    вопросы;;`)}}</p>
+            </div>
+
+            <!-- FAQ BOX -->
+            <div class="accordion accordion-flush container" id="accordionExample">
+
+                <faq v-for="f in profile.faq" :question="f.question" :index="f.id"> {{f.answer}} </faq>
+
+            </div>
+        </section>
+
+
+
+        <!-- ======= CONTACT Section ======= -->
+        <section id="contact" class="contact section-bg">
+            <div class="container">
+
+                <div class="section-title container" data-aos="fade-up" data-aos-duration="1000">
+                    <h2 class="lh-lg arb"> {{tarjem(`Contact us with an email of your request below , our team will
+                        be
+                        in touch the soonest !;;اتصل بنا عبر البريد الإلكتروني لطلبك أدناه ، وسيتواصل معك فريقنا في
+                        أقرب وقت ممكن!
+                        ;;Свяжитесь с нами по электронной почте с вашим запросом ниже, наша команда свяжется с вами
+                        в ближайшее время!
+                        ;;`)}} </h2>
+                    <p class="text-center fs-3 mt-3 arb"> {{tarjem(`Intrested ?;;مهتم
+                        ؟;;Заинтересованы;;`)}}
+                    </p>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-6">
+
+                        <div class="row">
+                            <div class="col-md-12" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="info-box rounded">
+                                    <i class="bi bi-map text-primary fs-4"></i>
+                                    <h3> {{tarjem(`Our Address;;العنوان;;адрес;;`)}} </h3>
+                                    <p>{{profile.address1}} <br> {{profile.address2}} </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="info-box mt-4 rounded">
+                                    <i class="bi bi-envelope text-primary fs-4"></i>
+                                    <h3>{{tarjem(`Email us;;راسلنا;;Эл. адрес;;`)}}</h3>
+                                    <p> {{profile.email1}} <br> {{profile.email2}} </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-box mt-4 rounded" data-aos="fade-up" data-aos-duration="1000">
+                                    <i class="bi bi-phone text-primary fs-4"></i>
+                                    <h3>{{tarjem(`Call us;;اتصل بنا;;вызов;;`)}}</h3>
+                                    <p> {{profile.number1}} <br> {{profile.number2}} </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-6 rounded">
+                        <form class="php-email-form rounded" data-aos="fade-up" data-aos-duration="1000">
+                            <div class="row">
+                                <div class="col-md-6 form-group rounded">
+                                    <input type="text" name="name" class="form-control" id="name"
+                                        :placeholder="tarjem(`Username;;Имя пользователя;;اسم المستخدم;;`)" required
+                                        v-model="username">
+                                </div>
+                                <div class="col-md-6 form-group mt-3 mt-md-0 rounded">
+                                    <input type="email" class="form-control" name="email" id="useremail"
+                                        :placeholder="tarjem(`Email;;Эл. адрес;;البريد الإلكتروني;;`)" required
+                                        v-model="useremail">
+                                </div>
+                            </div>
+                            <div class="form-group mt-3 rounded">
+                                <input type="text" class="form-control" name="subject" id="subject"
+                                    :placeholder="tarjem(`Subject;;Предмет;;اختر موضوعًا;;`)" required
+                                    v-model="subject">
+
+                                <!-- <h6 class="text-secondary ms-2">Select Subject :</h6> -->
+                                <!-- <select class="form-select" aria-label="Default select example" v-model="subject"
+                                    id="subject">
+                                    <option v-for="s in profile.subjects" :value="s.name">{{s.name}}</option>
+                                </select> -->
+                            </div>
+                            <div class="form-group mt-3 rounded">
+                                <textarea class="form-control" name="message" rows="5"
+                                    :placeholder="tarjem(`Message;;сообщение;;رسالة;;`)" required
+                                    v-model="message"></textarea>
+                            </div>
+
+                            <div class="text-center rounded">
+
+                                <a class="send-msg btn btn-primary mt-3"
+                                    :href="`mailto:${profile.email1}?subject=${encode(subject)}&body=${encode(''+username+' | '+useremail+'\n\n\n'+message)}`">
+                                    {{tarjem(`Send Message;;Отправить сообщение;;أرسل الرسالة;;`)}} </a>
+
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-info shadow-sm">
+                            <h3 class="text-uppercase">{{company}}</h3>
+                            <p class="pb-3 arb"><em> {{profile.bio}} </em>
+                            </p>
+                            <!-- <p> {{profile.address1}} <br> {{profile.address2}} <br><br>
+                                <strong>Phone:</strong> {{profile.number1}} <br>
+                                <strong>Email:</strong> {{profile.email1}} <br>
+                            </p> -->
+                            <a href="#" class="btn btn-outline-primary px-5 arb">{{tarjem(`Get Started ;;ابدأ
+                                الآن
+                                ;;Начать ;;`)}}</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links arb">
+                        <h4 class="text-dark fs-5">{{tarjem(`Useful links ;;روابط مفيدة;;Полезные ссылки
+                            ;;`)}}</h4>
+                        <ul>
+                            <li class="text-secondary fs-6"><i class="bi bi-chevron-right fs-6 me-1"></i> <a
+                                    href="#">{{tarjem(`Home;;الصفحة الرئيسية;;дом;;`)}}</a></li>
+                            <li class="text-secondary fs-6"><i class="bi bi-chevron-right fs-6 me-1"></i> <a
+                                    href="#">{{tarjem(`About;;نبذة عنا;;о нас;;`)}}</a></li>
+                            <li class="text-secondary fs-6"><i class="bi bi-chevron-right fs-6 me-1"></i> <a href="#">
+                                    {{tarjem(`Join us ;; انضم إلينا;; Присоединяйтесь к нам;;`)}} </a>
+                            </li>
+                            <li class="text-secondary fs-6"><i class="bi bi-chevron-right fs-6 me-1"></i> <a
+                                    href="#">{{tarjem(`Team ;;فريقنا ;;команда;;`)}}</a></li>
+                            <!-- <li class="text-secondary fs-6"><i class="bi bi-chevron-right fs-6 me-1"></i> <a
+                                    href="#">Privacy Policy</a></li> -->
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links arb">
+                        <h4 class="text-dark fs-5"> {{tarjem(`Check Also;;تحقق أيضا;;Проверьте
+                            также;;`)}} </h4>
+                        <ul>
+                            <li class="text-secondary fs-6"><i class="bi bi-chevron-right fs-6 me-1"></i> <a
+                                    href="#faq">{{tarjem(`F A Q ;;الاسئلة المتكررة ;;Часто задаваемые
+                                    вопросы;;`)}}</a></li>
+                            <li class="text-secondary fs-6"><i class="bi bi-chevron-right fs-6 me-1"></i> <a
+                                    href="#programs">{{tarjem(`Our Programs;;برامجنا`)}}</a></li>
+                            <li class="text-secondary fs-6"><i class="bi bi-chevron-right fs-6 me-1"></i> <a
+                                    href="#media"> {{tarjem(`Latest News;; أحدث الأخبار;; Последние
+                                    новости;;`)}} </a></li>
+                            <li class="text-secondary fs-6"><i class="bi bi-chevron-right fs-6 me-1"></i> <a
+                                    href="#clients">{{tarjem(`Partners & Clients;;شركاؤنا وعملائنا
+                                    ;;НАШИ ПАРТНЕРЫ И КЛИЕНТЫ
+                                    ;;`)}}</a></li>
+                            <!-- <li class="text-secondary fs-6"><i class="bi bi-chevron-right fs-6 me-1"></i> <a
+                                    href="#about">Learn More</a></li> -->
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 footer-newsletter arb">
+                        <h4 class="text-dark fs-5"> {{tarjem(`Our Newsletter;;نشرتنا الإخبارية;;Наш
+                            информационный бюллетень;;`)}} </h4>
+                        <p> {{tarjem(`Subscribe below so we can update you on our latest activities.;; اشترك
+                            أدناه حتى نتمكن من إطلاعك على أحدث أنشطتنا.;; Подпишитесь ниже, чтобы мы могли
+                            информировать вас о наших последних мероприятиях.;;`)}} </p>
+
+                        <div class="input-group mb-3">
+                            <input v-model="newsletter" type="text" class="form-control py-2"
+                                :placeholder="tarjem(`Enter your email;; ادخل بريدك;; Эл. адрес;;`) ">
+                            <button class="btn btn-danger" type="button" id="button-addon2" @click="subscribe">
+                                {{tarjem(`Subscribe;; الإشتراك;; Подписывайся;; `)}} </button>
+                        </div>
+
+                        <div class="mt-4 d-flex justify-content-evenly ">
+                            <a data-aos="fade-up" data-aos-delay="50" data-aos-duration="1000" :href="profile.whatsapp1"
+                                class="twitter"><i class="bi bi-whatsapp text-secondary fs-4"></i></a>
+                            <a data-aos="fade-up" data-aos-delay="550" data-aos-duration="1000"
+                                :href="profile.facebook1" class="facebook"><i
+                                    class="bi bi-facebook text-secondary fs-4"></i></a>
+                            <a data-aos="fade-up" data-aos-delay="1000" data-aos-duration="1000"
+                                :href="profile.linkedIn" class="linkedin"><i
+                                    class="bi bi-linkedin text-secondary fs-4"></i></a>
+                            <a data-aos="fade-up" data-aos-delay="1500" data-aos-duration="1000"
+                                :href="profile.instagram" class="linkedin"><i
+                                    class="bi bi-instagram text-secondary fs-4"></i></a>
+                            <!-- <a data-aos="fade-up" data-aos-delay="1000" data-aos-duration="1000" href="#"
+                                class="instagram"><i class="bi bi-instagram text-secondary fs-4"></i></a> -->
+                            <!-- <a data-aos="fade-up" data-aos-delay="1550" data-aos-duration="1000"  href="#" class="google-plus"><i class="bi bi-skype text-secondary fs-4"></i></a> -->
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <hr>
+            <h6 class="text-center text-secondary"><a href="https://lebancode.com" class="lebancode ls-2 com">Powered by
+                    Lebancode</a></h6>
+        </div>
+
+    </footer>
+
+    <i class="bi bi-translate position-fixed bottom-0 end-0 fs-4 m-3 ppx-2 btn btn-danger shadow z-index-fixed"
+        title="Translate - ترجم" data-bs-toggle="modal" data-bs-target="#tarjem"></i>
+    <!-- Modal -->
+    <div class="modal fade" id="tarjem" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i class="bi bi-translate fs-5 text-secondary me-2"></i>
+                    <h6 class="modal-title text-primary">Translate - ترجم </h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex justify-content-evenly align-items-center flex-wrap">
+                    <button class="btn btn-outline-success m-2" data-bs-dismiss="modal"
+                        @click="toggleLanguage('eng')">English</button>
+                    <!-- <button class="btn btn-outline-success m-2" data-bs-dismiss="modal"
+                        @click="toggleLanguage('rus')">русский</button> -->
+                    <button class="btn btn-outline-success m-2" data-bs-dismiss="modal"
+                        @click="toggleLanguage('arb')">العربية</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="assets/js/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+        </script>
+    <script src="assets/purecounter/purecounter.js"></script>
+    <script src="assets/swiper/swiper-bundle.min.js"></script>
+
+    <script src="assets/js/main.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init()
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('./sw.js').then(e => {
+                console.log('sw registered')
+            })
+        }
+    </script>
+
+</body>
+
+</html>
